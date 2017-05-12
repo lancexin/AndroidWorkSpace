@@ -220,8 +220,8 @@ public class DownloadProxy {
         if (isConnected.get()) {
             return;
         }
-        Intent intent = new Intent("com.aazen.companion.market.download.DOWNLOAD_SERVICE");
-        intent.setPackage("com.aazen.companion.market.watch");
+        Intent intent = new Intent(Contants.DOWNLOAD_ACTION);
+        intent.setPackage(Contants.DOWNLOAD_PACKAGE);
         mContext.bindService(intent, mServiceConnection,
                 Context.BIND_AUTO_CREATE);
     }

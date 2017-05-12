@@ -138,8 +138,6 @@ public class DownloadTask implements Runnable {
             httpUrlConnection.setReadTimeout(10 * 1000);
             httpUrlConnection
                     .setRequestProperty("RANGE", "bytes=" + nPos + "-");
-            httpUrlConnection
-                    .setRequestProperty("X_AAZENWATCH_SN", Build.SERIAL);
 
             responseCode = httpUrlConnection.getResponseCode();
             if (responseCode == 416){

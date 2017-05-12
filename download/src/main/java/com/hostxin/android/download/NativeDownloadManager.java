@@ -95,12 +95,6 @@ public class NativeDownloadManager {
             if (!f.exists()) {
                 f.mkdir();
             }
-            try {
-                String[] args2 = {"chmod", "777", filePath};
-                Runtime.getRuntime().exec(args2);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             pollThread = new Thread(pollRunnable);
             mHandlerThread = handlerThread;
 
@@ -475,53 +469,53 @@ public class NativeDownloadManager {
         return null;
     }
 
-    protected void handleSuccess(DownloadInfo model) {
+     void handleSuccess(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_SUCCESSFUL);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_COMPLETE,
                 model);
         message.sendToTarget();
     }
 
-    protected void handleStart(DownloadInfo model) {
+     void handleStart(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_DOWNLOADING);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_START, model);
         message.sendToTarget();
     }
 
-    protected void handleContinue(DownloadInfo model) {
+     void handleContinue(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_DOWNLOADING);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_CONTINUE,
                 model);
         message.sendToTarget();
     }
 
-    protected void handlePending(DownloadInfo model) {
+     void handlePending(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_PENDING);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_PENDING,
                 model);
         message.sendToTarget();
     }
 
-    protected void handleConnecting(DownloadInfo model) {
+     void handleConnecting(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_CONNECTING);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_CONNECTING,
                 model);
         message.sendToTarget();
     }
 
-    protected void handleStop(DownloadInfo model) {
+     void handleStop(DownloadInfo model) {
         model.setState(DownloadInfo.State.STATUS_PAUSED);
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_STOP, model);
         message.sendToTarget();
     }
 
-    protected void handleProgress(DownloadInfo model) {
+     void handleProgress(DownloadInfo model) {
         Message message = mHandler.obtainMessage(
                 MESSAGE_DOWNLOAD_SCHEDULE_CHANGE, model);
         message.sendToTarget();
     }
 
-    protected void handleError(DownloadInfo model, DownloadException exception) {
+     void handleError(DownloadInfo model, DownloadException exception) {
         model.setState(DownloadInfo.State.STATUS_FAILED);
         model.setErrorCode(exception.getFinalStatus());
         Message message = mHandler.obtainMessage(MESSAGE_DOWNLOAD_ERROR, model);
