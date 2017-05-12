@@ -16,7 +16,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-public class ActivityBrowser extends BaseActivityBrowser implements View.OnClickListener {
+public class ActivityBrowser extends BaseActivityBrowser{
     private MeWebView webView;
     private ProgressBar progress_horizontal;
 
@@ -69,8 +69,7 @@ public class ActivityBrowser extends BaseActivityBrowser implements View.OnClick
         CookieSyncManager.createInstance(this);
         CookieSyncManager.getInstance().startSync();
         CookieManager.getInstance().removeSessionCookie();
-        // realyUrl = "http://test.aazen.com:8396/login.html?status=login&";
-        // realyUrl = "https://account.aazen.com/Aazen_OAuth_cn/account.html?"+"sn="+sn+"&imei="+id+"#!home";
+
         runOnOtherThread(new Runnable() {
 
             @Override
@@ -103,12 +102,6 @@ public class ActivityBrowser extends BaseActivityBrowser implements View.OnClick
         webView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.browser_back) {
-            finish();
-        }
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

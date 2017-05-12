@@ -1,1 +1,1 @@
-include ':app', ':pendingtask', ':common', ':keyedtaskprocessor', ':download', ':jsmethod'
+include ':app', ':pendingtask', ':common', ':keyedtaskprocessor', ':download', ':jsmethod', ':brcode'

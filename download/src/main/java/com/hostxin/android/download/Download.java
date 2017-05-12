@@ -1,5 +1,6 @@
 package com.hostxin.android.download;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.RemoteException;
 
@@ -41,12 +42,12 @@ public class Download {
         mProxy.init(context);
     }
 
-    public static void bindService() {
-        mProxy.bindService();
+    public static void bindService(Context context) {
+        mProxy.bindService(context);
     }
 
-    public static void unbindService() {
-        mProxy.unbindService();
+    public static void unbindService(Context context) {
+        mProxy.unbindService(context);
     }
 
     public static void setConnectListener(ConnectListener mConnectListener) {

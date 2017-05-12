@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 public class MD5 {
 	
@@ -21,7 +22,7 @@ public class MD5 {
 
 			str[k++] = hexDigits[byte0 & 0xf];
 		}
-		return new String(str).toUpperCase();
+		return new String(str).toUpperCase(Locale.getDefault());
 	}
 	
 	public static String getMD5(byte[] b) {

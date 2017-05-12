@@ -1,5 +1,6 @@
 package com.hostxin.android.download;
 
+import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -175,7 +176,6 @@ public class DownloadProxy {
         }
     }
 
-    private Context mContext;
 
     private ConnectListener mConnectListener;
 
@@ -211,23 +211,22 @@ public class DownloadProxy {
         if (isInited.get()) {
             return;
         }
-        mContext = context;
         isInited.set(true);
-        bindService();
+        bindService(context);
     }
 
-    public void bindService() {
+    public void bindService(Context context) {
         if (isConnected.get()) {
             return;
         }
         Intent intent = new Intent(Contants.DOWNLOAD_ACTION);
         intent.setPackage(Contants.DOWNLOAD_PACKAGE);
-        mContext.bindService(intent, mServiceConnection,
+        context.bindService(intent, mServiceConnection,
                 Context.BIND_AUTO_CREATE);
     }
 
-    public void unbindService() {
-        mContext.unbindService(mServiceConnection);
+    public void unbindService(Context context) {
+        context.unbindService(mServiceConnection);
     }
 
     public void setConnectListener(ConnectListener mConnectListener) {

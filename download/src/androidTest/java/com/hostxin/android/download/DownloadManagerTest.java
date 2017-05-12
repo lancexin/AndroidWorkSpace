@@ -26,7 +26,7 @@ public class DownloadManagerTest {
         assertEquals("com.hostxin.android.download.test", appContext.getPackageName());
 
         //this always init in Application
-        NativeDownloadManager.getInstence().init(appContext,Contants.FILE_PATH);
+        NativeDownloadManager.getInstence().init(Contants.FILE_PATH);
 
         //this always set in Activity or Fragment
         NativeDownloadManager.getInstence().addDownloadCallback(mDownloadWatcher);

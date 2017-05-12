@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="transparent">#00000000</drawable>
     <item name="browser_web" type="id">false</item>
-    <color name="browser_loading_progress_bkg">#014899</color>
     <item name="progress_horizontal" type="id">false</item>
-    <color name="Body_bkg">#E9EDF1</color>
 
-    <style name="Browser_Loading_Progress_Bkg" parent="@android:style/Widget.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/browser_loading_progress</item>
-        <item name="android:minHeight">16dip</item>
-        <item name="android:maxHeight">16dip</item>
-    </style>
 </resources>
