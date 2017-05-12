@@ -5708,7 +5708,7 @@ public class StringUtils {
 		if (str == null) {
 			return null;
 		}
-		return str.toUpperCase();
+		return str.toUpperCase(Locale.getDefault());
 	}
 
 	/**
@@ -5773,7 +5773,7 @@ public class StringUtils {
 		if (str == null) {
 			return null;
 		}
-		return str.toLowerCase();
+		return str.toLowerCase(Locale.getDefault());
 	}
 
 	/**

@@ -9,7 +9,6 @@ import android.os.Message;
 import com.hostxin.android.util.Dbg;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -61,7 +60,6 @@ public class NativeDownloadManager {
     private ArrayDeque<DownloadInfo> waitDownloads = new ArrayDeque<DownloadInfo>();
     private ArrayDeque<DownloadInfo> downloads = new ArrayDeque<DownloadInfo>();
     private String mFilePath;
-    private Context mContext;
 
     private static final int MESSAGE_DOWNLOAD_ADD = 0;
     private static final int MESSAGE_DOWNLOAD_REMOVE = 1;
@@ -78,16 +76,15 @@ public class NativeDownloadManager {
         return mInstence;
     }
 
-    public synchronized void init(Context conetxt,String filePath) {
-        mContext = conetxt;
+    public synchronized void init(String filePath) {
         if (!isLoaded) {
             HandlerThread thread = new HandlerThread(TAG);
             thread.start();
-            init(conetxt, thread,filePath);
+            init(thread,filePath);
         }
     }
 
-    public synchronized void init(Context conetxt, HandlerThread handlerThread,String filePath) {
+    public synchronized void init(HandlerThread handlerThread,String filePath) {
         if (!isLoaded) {
             isLoaded = true;
             mFilePath = filePath;

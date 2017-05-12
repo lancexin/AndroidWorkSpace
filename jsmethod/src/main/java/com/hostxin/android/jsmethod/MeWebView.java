@@ -1,6 +1,7 @@
 package com.hostxin.android.jsmethod;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -57,7 +58,8 @@ public class MeWebView extends WebView {
 		super(context, attrs);
 
 	}
-	
+
+	@SuppressLint("SetJavaScriptEnabled")
 	public void init(BaseActivityBrowser activity) {
 
 		manager = new JsMethodManager(activity, this);
@@ -73,10 +75,7 @@ public class MeWebView extends WebView {
 		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
 		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-		// Access-Control-Allow-Origin Error At Android 4.1
-		if (Build.VERSION.SDK_INT >= 16) {
-			webSettings.setAllowUniversalAccessFromFileURLs(true);
-		}
+		webSettings.setAllowUniversalAccessFromFileURLs(true);
 		webSettings.setDomStorageEnabled(true);
 		webSettings.setMediaPlaybackRequiresUserGesture(false);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.SparseArray;
 
 import com.hostxin.android.util.Dbg;
 
@@ -15,13 +16,13 @@ public class DownloadService extends Service {
 
     private static final String TAG = "DownloadService";
 
-    private static Map<Integer, DownloadCallbackWapper> watchers = new HashMap<Integer, DownloadCallbackWapper>();
+    private static SparseArray<DownloadCallbackWapper> watchers = new SparseArray<DownloadCallbackWapper>();
 
     @Override
     public void onCreate() {
         Dbg.d(TAG, "DownloadService  onCreate");
         super.onCreate();
-        NativeDownloadManager.getInstence().init(getApplicationContext(),Contants.FILE_PATH);
+        NativeDownloadManager.getInstence().init(Contants.FILE_PATH);
     }
 
     @Override
@@ -94,7 +95,7 @@ public class DownloadService extends Service {
             long l = Binder.clearCallingIdentity();
             try {
                 synchronized (watchers) {
-                    if (watchers.containsKey(pid)) {
+                    if (watchers.indexOfKey(pid) >= 0) {
                         DownloadCallbackWapper dcw = watchers.get(pid);
                         IDownloadCallback oldDownloadCallback = dcw
                                 .getDownloadCallback();
@@ -124,10 +125,8 @@ public class DownloadService extends Service {
 
     public static void removeDownloadCallbackByPid(Integer pid) {
         synchronized (watchers) {
-            if (watchers.containsKey(pid)) {
-                Dbg.d(TAG, "DownloadService  removeDownloadCallbackByPid :" + pid);
-                watchers.remove(pid);
-            }
+            Dbg.d(TAG, "DownloadService  removeDownloadCallbackByPid :" + pid);
+            watchers.remove(pid);
         }
     }
 }

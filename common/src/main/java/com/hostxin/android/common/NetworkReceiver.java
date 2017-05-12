@@ -4,6 +4,7 @@ package com.hostxin.android.common;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 
 
 import com.hostxin.android.util.Dbg;
@@ -20,10 +21,14 @@ import java.util.Vector;
  */
 public class NetworkReceiver extends BroadcastReceiver {
 
+    private static final String ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+
     private static final String TAG = "NetworkReceiver";
 
     private static final Vector<NetworkWatcher> watchers = new Vector<NetworkWatcher>();
     
+    private static final NetworkReceiver mInstence = new NetworkReceiver();
+
     public static interface NetworkWatcher {
         public void onNetChange(boolean isOn);
     }
@@ -39,17 +44,24 @@ public class NetworkReceiver extends BroadcastReceiver {
             watchers.remove(watcher);
         }
     }
+
+    public static void registNetworkReceiver(Context context){
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION);
+        context.registerReceiver(mInstence,filter);
+    }
    
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        boolean success = NetworkUtils.isNetworkConnected(context);
-        Dbg.d(TAG,"onReceive success:"+success);
-        // TODO Auto-generated method stub
-        synchronized (watchers) {
-            ListIterator<NetworkWatcher> lte = watchers.listIterator();
-            while (lte.hasNext()) {
-                lte.next().onNetChange(success);
+        if(ACTION.equals(intent.getAction())){
+            boolean success = NetworkUtils.isNetworkConnected(context);
+            Dbg.d(TAG,"onReceive success:"+success);
+            // TODO Auto-generated method stub
+            synchronized (watchers) {
+                ListIterator<NetworkWatcher> lte = watchers.listIterator();
+                while (lte.hasNext()) {
+                    lte.next().onNetChange(success);
+                }
             }
         }
     }
