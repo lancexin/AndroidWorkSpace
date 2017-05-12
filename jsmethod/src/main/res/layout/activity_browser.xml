@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:aazen="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <com.aazen.view.TitleBarView
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        aazen:mdisplayBackImage="true"
+        aazen:mdisplayMoreButton="false"
+        aazen:mtitleText=""/>
+
+    <com.aazen.brawser.MeWebView
+        android:id="@id/browser_web"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/titleBar"
+        android:scrollbarThumbHorizontal="@drawable/transparent"
+        android:scrollbarThumbVertical="@drawable/brawser_scrollbar"/>
+
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/titleBar"
+        android:minHeight="3dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/seekbar_web_progress"/>
+
+    <ImageView
+        android:id="@+id/browser_back"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_white"
+        android:visibility="gone"/>
+
+</RelativeLayout>

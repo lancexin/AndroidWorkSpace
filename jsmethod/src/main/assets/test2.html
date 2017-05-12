@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+    <title>test</title>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <META content="Microsoft FrontPage 5.0" name=GENERATOR>
+</HEAD>
+<script>
+		function setp(){
+		 var p = {name:"testkey",value:"testvalue"};
+			window.setNativeProp(p,function(success){
+				alert(success.success);
+			},
+			function(error){
+				alert(error);
+			});
+		}
+		
+		function getp(){
+			window.getNativeProp("testkey",function(success){
+				alert(success.value);
+			},
+			function(error){
+				alert(error);
+			});
+		}
+		
+		function closeb(){
+			window.closeBrowser();
+		}
+
+</script>
+<BODY>
+<input type="button" id="btn1" value="设置值" onclick="setp()"/></br>
+<input type="button" id="btn2" value="获取值" onclick="getp()"/></br>
+<input type="button" id="btn2" value="关闭浏览器" onclick="closeb()"/></br>
+</BODY>
+</HTML>

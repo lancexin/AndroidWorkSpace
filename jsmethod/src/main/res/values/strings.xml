@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">jsmethod</string>
+    <string name="error_code_no_net">Network is not connected.Please check</string>
+</resources>
