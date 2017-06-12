@@ -1,0 +1,12 @@
+### Touch事件传递
+
+在ViewRootImpl初始化时,会实例化一个WindowInputEventReceiver的实例,这个实例可以截获所有的触摸屏事件.
+最终会调用Activity的dispatchTouchEvent
+
+最终会调用到DecorView的 dispatchTouchEvent进行View树的调度传递.
+
+
+
+touch事件的分发是从父View到子View
+touch事件的传递是从子View到父View
+

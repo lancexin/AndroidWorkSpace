@@ -1,0 +1,28 @@
+# 页面渲染
+
+Android的显示组件有:Activity,Dialog,Toast等
+
+其中Activity和Dialog的UI载体都是Window,它的实现类一般是PhoneWindow
+Toast 的载体是ViewRootImpl,是WindowManagerGlobal直接管理的.
+PhoneWindow的根View是DecorView,系统会初始化一个ViewRootImpl对DecorView进行绘制的托管.
+因此可以这么理解:
+一个app是有很多个页面组成的,每个页面都是一个Window对象,每个Window对象都对应一个ViewRootImpl对象进行最终的页面渲染操作.
+
+ViewRootImpl初始化时会实例化一个Surface对象,它是操作底层图像流的一个句柄,通过Canvas进行画布的绘制.
+
+Window的绘制是以View树形式绘制的,每个Window的根View是DecorView,通过调用DockerView的draw方法进行层级绘制.
+
+View的绘制涉及到的方法:
+layout onLayout主要确定View所在父view的位置,同时决定子view的位置.
+measure onMeasure主要确定View的大小同时决定子view的大小
+draw View和子View的绘制
+onDraw 主要进行View的绘制
+dispatchDraw 主要进行子view的绘制,只有ViewGroup才有.
+requestLayout 一般是在绘制前调用,会进行view的layout和measure操作
+
+子view的刷新实现，调用子view的invalidate方法可以达到刷新子view的目的，
+其实现方法是，将子view当前所在的区域Rect传到parentview的invalidateChild，
+最终会传到ViewRootImpl的invalidateRectOnScreen，ViewRootImpl会将当前需要绘制的区域规定为传入的Rect dirty，
+然后调用scheduleTraversals进行区域刷新。
+这样的好处是画布的局部刷新,只刷新某个区域而不是整体刷新.
+
